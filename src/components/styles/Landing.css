@@ -91,17 +91,16 @@
 
 .character-rim {
   position: absolute;
-  width: 400px;
-  height: 400px;
+  width: 450px;
+  height: 450px;
   z-index: 1;
   background-color: #22d3ee;
-  transform: translate(-50%, 36%) scaleX(1.4);
   box-shadow: inset 66px 35px 85px 0px rgba(0, 180, 180, 0.65);
-  filter: blur(50px);
+  filter: blur(55px);
   border-radius: 50%;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, 100%) scale(1.4);
+  transform: translate(-50%, 100%) scale(1.5);
   opacity: 0;
 }
 

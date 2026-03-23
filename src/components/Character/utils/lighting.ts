@@ -13,6 +13,11 @@ const setLighting = (scene: THREE.Scene) => {
   directionalLight.shadow.camera.far = 50;
   scene.add(directionalLight);
 
+  // Warm fill light from the right for depth and dimension
+  const fillLight = new THREE.DirectionalLight(0xffeedd, 0);
+  fillLight.position.set(2, 1, 3);
+  scene.add(fillLight);
+
   const pointLight = new THREE.PointLight(0x22d3ee, 0, 100, 3);
   pointLight.position.set(3, 12, 4);
   pointLight.castShadow = true;
@@ -27,9 +32,10 @@ const setLighting = (scene: THREE.Scene) => {
       scene.environmentRotation.set(5.76, 85.85, 1);
     });
 
-  function setPointLight(screenLight: any) {
-    if (screenLight.material.opacity > 0.9) {
-      pointLight.intensity = screenLight.material.emissiveIntensity * 20;
+  function setPointLight(screenLight: THREE.Mesh) {
+    const mat = screenLight.material as THREE.MeshStandardMaterial;
+    if (mat.opacity > 0.9) {
+      pointLight.intensity = mat.emissiveIntensity * 20;
     } else {
       pointLight.intensity = 0;
     }
@@ -38,12 +44,17 @@ const setLighting = (scene: THREE.Scene) => {
   const ease = "power2.inOut";
   function turnOnLights() {
     gsap.to(scene, {
-      environmentIntensity: 0.64,
+      environmentIntensity: 0.78,
       duration: duration,
       ease: ease,
     });
     gsap.to(directionalLight, {
-      intensity: 1,
+      intensity: 1.4,
+      duration: duration,
+      ease: ease,
+    });
+    gsap.to(fillLight, {
+      intensity: 0.6,
       duration: duration,
       ease: ease,
     });

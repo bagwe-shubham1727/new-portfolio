@@ -19,11 +19,13 @@ const Scene = () => {
   const sceneRef = useRef(new THREE.Scene());
   const { setLoading } = useLoading();
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [character, setChar] = useState<THREE.Object3D | null>(null);
+  const resizeHandlerRef = useRef<(() => void) | null>(null);
   useEffect(() => {
     if (canvasDiv.current) {
-      let rect = canvasDiv.current.getBoundingClientRect();
-      let container = { width: rect.width, height: rect.height };
+      const rect = canvasDiv.current.getBoundingClientRect();
+      const container = { width: rect.width, height: rect.height };
       const aspect = container.width / container.height;
       const scene = sceneRef.current;
 
@@ -44,13 +46,13 @@ const Scene = () => {
       camera.updateProjectionMatrix();
 
       let headBone: THREE.Object3D | null = null;
-      let screenLight: any | null = null;
+      let screenLight: THREE.Object3D | null = null;
       let mixer: THREE.AnimationMixer;
 
       const clock = new THREE.Clock();
 
       const light = setLighting(scene);
-      let progress = setProgress((value) => setLoading(value));
+      const progress = setProgress((value) => setLoading(value));
       const { loadCharacter } = setCharacter(renderer, scene, camera);
 
       loadCharacter().then((gltf) => {
@@ -58,7 +60,7 @@ const Scene = () => {
           const animations = setAnimations(gltf);
           hoverDivRef.current && animations.hover(gltf, hoverDivRef.current);
           mixer = animations.mixer;
-          let character = gltf.scene;
+          const character = gltf.scene;
           setChar(character);
           scene.add(character);
           headBone = character.getObjectByName("spine006") || null;
@@ -69,9 +71,9 @@ const Scene = () => {
               animations.startIntro();
             }, 2500);
           });
-          window.addEventListener("resize", () =>
-            handleResize(renderer, camera, canvasDiv, character)
-          );
+          resizeHandlerRef.current = () =>
+            handleResize(renderer, camera, canvasDiv, character);
+          window.addEventListener("resize", resizeHandlerRef.current);
         }
       });
 
@@ -117,7 +119,7 @@ const Scene = () => {
             interpolation.y,
             THREE.MathUtils.lerp
           );
-          light.setPointLight(screenLight);
+          light.setPointLight(screenLight as THREE.Mesh);
         }
         const delta = clock.getDelta();
         if (mixer) {
@@ -130,9 +132,9 @@ const Scene = () => {
         clearTimeout(debounce);
         scene.clear();
         renderer.dispose();
-        window.removeEventListener("resize", () =>
-          handleResize(renderer, camera, canvasDiv, character!)
-        );
+        if (resizeHandlerRef.current) {
+          window.removeEventListener("resize", resizeHandlerRef.current);
+        }
         if (canvasDiv.current) {
           canvasDiv.current.removeChild(renderer.domElement);
         }

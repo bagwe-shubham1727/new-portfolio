@@ -38,22 +38,6 @@ const Contact = () => {
             >
               Linkedin <MdArrowOutward />
             </a>
-            <a
-              href={contact.social.twitter}
-              target="_blank"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              Twitter <MdArrowOutward />
-            </a>
-            <a
-              href={contact.social.instagram}
-              target="_blank"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              Instagram <MdArrowOutward />
-            </a>
           </div>
           <div className="contact-box">
             <h2>
