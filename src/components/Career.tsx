@@ -17,13 +17,11 @@ const Career = () => {
           </div>
           {career.items.map((item, index) => (
             <div className="career-info-box" key={`${item.company}-${index}`}>
-              <div className="career-info-in">
-                <div className="career-role">
-                  <h4>{item.role}</h4>
-                  <h5>{item.company}</h5>
-                </div>
-                <h3>{item.period}</h3>
+              <div className="career-role">
+                <h4>{item.role}</h4>
+                <h5>{item.company}</h5>
               </div>
+              <h3>{item.period}</h3>
               <p>{item.description}</p>
             </div>
           ))}
