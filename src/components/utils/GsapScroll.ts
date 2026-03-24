@@ -6,8 +6,7 @@ export function setCharTimeline(
   camera: THREE.PerspectiveCamera
 ) {
   let intensity: number = 0;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const intensityInterval = setInterval(() => {
+  setInterval(() => {
     intensity = Math.random();
   }, 200);
   const tl1 = gsap.timeline({

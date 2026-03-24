@@ -19,8 +19,7 @@ const Scene = () => {
   const sceneRef = useRef(new THREE.Scene());
   const { setLoading } = useLoading();
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [character, setChar] = useState<THREE.Object3D | null>(null);
+  const [, setChar] = useState<THREE.Object3D | null>(null);
   const resizeHandlerRef = useRef<(() => void) | null>(null);
   useEffect(() => {
     if (canvasDiv.current) {
