@@ -1,4 +1,4 @@
-import * as THREE from "three";
+import type * as THREE from "three";
 import gsap from "gsap";
 
 export function setCharTimeline(
@@ -143,6 +143,10 @@ export function setCharTimeline(
 }
 
 export function setAllTimeline() {
+  const isMobile = window.innerWidth < 1024;
+  const dur = isMobile ? 0.3 : 0.5;
+  const stagger = isMobile ? 0.06 : 0.1;
+
   const careerTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: ".career-section",
@@ -156,7 +160,7 @@ export function setAllTimeline() {
     .fromTo(
       ".career-timeline",
       { maxHeight: "10%" },
-      { maxHeight: "100%", duration: 0.5 },
+      { maxHeight: "100%", duration: dur },
       0
     )
 
@@ -169,7 +173,7 @@ export function setAllTimeline() {
     .fromTo(
       ".career-info-box",
       { opacity: 0 },
-      { opacity: 1, stagger: 0.1, duration: 0.5 },
+      { opacity: 1, stagger: stagger, duration: dur },
       0
     )
     .fromTo(
