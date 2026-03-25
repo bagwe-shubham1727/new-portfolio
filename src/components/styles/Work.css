@@ -189,6 +189,8 @@
 
 .work-image-in {
   position: relative;
+  min-height: 350px;
+  width: 100%;
 }
 
 .work-link {
@@ -304,6 +306,10 @@
 }
 
 @media only screen and (max-width: 900px) {
+  .work-image-in {
+    min-height: 200px;
+  }
+
   .work-section {
     padding: 50px 0;
   }
