@@ -12,6 +12,8 @@ import setSplitText from "./utils/splitText";
 
 const TechStack = lazy(() => import("./TechStack"));
 
+const isTouchDevice = !window.matchMedia("(pointer: fine)").matches;
+
 const MainContainer = ({ children }: PropsWithChildren) => {
   const [isDesktopView, setIsDesktopView] = useState<boolean>(
     window.innerWidth > 1024
@@ -36,7 +38,7 @@ const MainContainer = ({ children }: PropsWithChildren) => {
 
   return (
     <div className="container-main">
-      <Cursor />
+      {!isTouchDevice && <Cursor />}
       <Navbar />
       <SocialIcons />
       {isDesktopView && children}
