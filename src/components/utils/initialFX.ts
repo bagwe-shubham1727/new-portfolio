@@ -3,14 +3,42 @@ import gsap from "gsap";
 import { smoother } from "../Navbar";
 
 export function initialFX() {
+  // General init — runs on ALL screen sizes
   document.body.style.overflowY = "auto";
-  smoother.paused(false);
+  smoother?.paused(false);
   document.getElementsByTagName("main")[0].classList.add("main-active");
   gsap.to("body", {
     backgroundColor: "#0a0e17",
     duration: 0.5,
     delay: 1,
   });
+
+  // Non-SplitText fade-ins — run on ALL screen sizes
+  gsap.fromTo(
+    ".landing-info-h2",
+    { opacity: 0, y: 30 },
+    {
+      opacity: 1,
+      duration: 1.2,
+      ease: "power1.inOut",
+      y: 0,
+      delay: 0.8,
+    }
+  );
+  gsap.fromTo(
+    [".header", ".icons-section", ".nav-fade"],
+    { opacity: 0 },
+    {
+      opacity: 1,
+      duration: 1.2,
+      ease: "power1.inOut",
+      delay: 0.1,
+    }
+  );
+
+  // SplitText animations — skip on mobile (< 900px)
+  // ALL SplitText variables and LoopText calls stay below this guard.
+  if (window.innerWidth < 900) return;
 
   var landingText = new SplitText(
     [".landing-info h3", ".landing-intro h2", ".landing-intro h1"],
@@ -47,28 +75,6 @@ export function initialFX() {
       y: 0,
       stagger: 0.025,
       delay: 0.3,
-    }
-  );
-
-  gsap.fromTo(
-    ".landing-info-h2",
-    { opacity: 0, y: 30 },
-    {
-      opacity: 1,
-      duration: 1.2,
-      ease: "power1.inOut",
-      y: 0,
-      delay: 0.8,
-    }
-  );
-  gsap.fromTo(
-    [".header", ".icons-section", ".nav-fade"],
-    { opacity: 0 },
-    {
-      opacity: 1,
-      duration: 1.2,
-      ease: "power1.inOut",
-      delay: 0.1,
     }
   );
 
