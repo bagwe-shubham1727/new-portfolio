@@ -13,6 +13,11 @@ export type ProjectItem = {
   link?: string;
 };
 
+export type TechItem = {
+  name: string;
+  icon: string;
+};
+
 export const personalContent = {
   landing: {
     greeting: "Hello! I'm",
@@ -83,16 +88,21 @@ export const personalContent = {
   },
   techStack: {
     title: "My Techstack",
-    imageUrls: [
-      "/images/react2.webp",
-      "/images/next2.webp",
-      "/images/node2.webp",
-      "/images/express.webp",
-      "/images/mongo.webp",
-      "/images/mysql.webp",
-      "/images/typescript.webp",
-      "/images/javascript.webp",
-    ],
+    technologies: [
+      { name: "HTML 5", icon: "html" },
+      { name: "CSS 3", icon: "css" },
+      { name: "JavaScript", icon: "javascript" },
+      { name: "TypeScript", icon: "typescript" },
+      { name: "React JS", icon: "reactjs" },
+      { name: "Redux Toolkit", icon: "redux" },
+      { name: "Tailwind CSS", icon: "tailwind" },
+      { name: "Node JS", icon: "nodejs" },
+      { name: "MongoDB", icon: "mongodb" },
+      { name: "Three JS", icon: "threejs" },
+      { name: "Git", icon: "git" },
+      { name: "Figma", icon: "figma" },
+      { name: "Docker", icon: "docker" },
+    ] as TechItem[],
   },
   contact: {
     title: "Contact",
