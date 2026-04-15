@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Decal, Float, useTexture } from "@react-three/drei";
 import { personalContent } from "../data/personalContent";
+import { isDesktop } from "../lib/device";
 
 import htmlIcon from "../assets/tech/html.png";
 import cssIcon from "../assets/tech/css.png";
@@ -79,10 +80,24 @@ const TechStack = () => {
   return (
     <div className="techstack">
       <h2>{techStack.title}</h2>
-      <div className="tech-balls-grid">
+      <div className={isDesktop ? "tech-balls-grid" : "tech-icons-grid"}>
         {techStack.technologies.map((tech) => (
-          <div className="tech-ball-wrapper" key={tech.name}>
-            <BallCanvas icon={techIcons[tech.icon]} />
+          <div
+            className={isDesktop ? "tech-ball-wrapper" : "tech-icon-wrapper"}
+            key={tech.name}
+          >
+            {isDesktop ? (
+              <BallCanvas icon={techIcons[tech.icon]} />
+            ) : (
+              <img
+                src={techIcons[tech.icon]}
+                alt={tech.name}
+                className="tech-icon-img"
+                width={48}
+                height={48}
+                loading="lazy"
+              />
+            )}
             <p className="tech-label">{tech.name}</p>
           </div>
         ))}

@@ -68,12 +68,14 @@ const Scene = () => {
             setTimeout(() => {
               light.turnOnLights();
               animations.startIntro();
-            }, 2500);
+            }, 1200);
           });
           resizeHandlerRef.current = () =>
             handleResize(renderer, camera, canvasDiv, character);
           window.addEventListener("resize", resizeHandlerRef.current);
         }
+      }).catch(() => {
+        progress.clear();
       });
 
       let mouse = { x: 0, y: 0 },

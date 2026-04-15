@@ -19,10 +19,10 @@ const Cursor = () => {
 
     const loop = () => {
       if (!hover) {
-        const delay = 6;
+        const delay = 3;
         cursorPos.x += (mousePos.x - cursorPos.x) / delay;
         cursorPos.y += (mousePos.y - cursorPos.y) / delay;
-        gsap.to(cursor, { x: cursorPos.x, y: cursorPos.y, duration: 0.1 });
+        cursor.style.transform = `translate3d(${cursorPos.x}px, ${cursorPos.y}px, 0)`;
       }
       animFrameId = requestAnimationFrame(loop);
     };

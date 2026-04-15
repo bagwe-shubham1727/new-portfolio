@@ -7,8 +7,9 @@
 }
 
 .work-section h2 {
-  font-size: 70px;
-  font-weight: 500;
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 400;
   margin-top: 0;
   margin-bottom: 50px;
 }
@@ -21,7 +22,23 @@
   margin: auto;
 }
 
-/* ── Carousel ── */
+/* ── Desktop Stacked Layout ── */
+.work-stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.work-stacked-item {
+  padding: 50px 0;
+  border-top: 1px solid #363636;
+}
+
+.work-stacked-item:last-child {
+  border-bottom: 1px solid #363636;
+}
+
+/* ── Carousel (Mobile) ── */
 .carousel-wrapper {
   position: relative;
   width: 100%;
@@ -86,6 +103,14 @@
   color: #adacac;
   margin: 0;
   font-size: 16px;
+}
+
+.carousel-description {
+  font-weight: 300;
+  color: #adacac;
+  margin: 4px 0 0;
+  font-size: 15px;
+  line-height: 1.5;
 }
 
 .carousel-tools {
@@ -247,10 +272,6 @@
 }
 
 @media only screen and (max-width: 1400px) {
-  .work-section h2 {
-    font-size: 50px;
-  }
-
   .carousel-details h4 {
     font-size: 22px;
   }
@@ -315,7 +336,6 @@
   }
 
   .work-section h2 {
-    font-size: 40px;
     margin-bottom: 30px;
   }
 

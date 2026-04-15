@@ -9,6 +9,16 @@ const Contact = () => {
     <div className="contact-section section-container" id="contact">
       <div className="contact-container">
         <h3>{contact.title}</h3>
+        <p className="contact-cta-text">
+          Have an idea or opportunity? Let's build something together.
+        </p>
+        <a
+          href={`mailto:${contact.email}`}
+          className="contact-cta-button"
+          data-cursor="disable"
+        >
+          Say Hello <MdArrowOutward />
+        </a>
         <div className="contact-flex">
           <div className="contact-box">
             <h4>Email</h4>
@@ -25,6 +35,7 @@ const Contact = () => {
             <a
               href={contact.social.github}
               target="_blank"
+              rel="noopener noreferrer"
               data-cursor="disable"
               className="contact-social"
             >
@@ -33,6 +44,7 @@ const Contact = () => {
             <a
               href={contact.social.linkedin}
               target="_blank"
+              rel="noopener noreferrer"
               data-cursor="disable"
               className="contact-social"
             >

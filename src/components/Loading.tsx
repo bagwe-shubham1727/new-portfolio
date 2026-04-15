@@ -1,37 +1,52 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./styles/Loading.css";
 import { useLoading } from "../context/LoadingProvider";
 
-import Marquee from "react-fast-marquee";
+const marqueeItems = [
+  "Full Stack Developer",
+  "Software Engineer",
+  "Full Stack Developer",
+  "Software Engineer",
+  "Full Stack Developer",
+  "Software Engineer",
+];
 
 const Loading = ({ percent }: { percent: number }) => {
   const { setIsLoading } = useLoading();
   const [loaded, setLoaded] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [clicked, setClicked] = useState(false);
-
-  if (percent >= 100) {
-    setTimeout(() => {
-      setLoaded(true);
-      setTimeout(() => {
-        setIsLoaded(true);
-      }, 1000);
-    }, 600);
-  }
+  const hasTriggered = useRef(false);
 
   useEffect(() => {
+    if (percent >= 100 && !hasTriggered.current) {
+      hasTriggered.current = true;
+      let t2: ReturnType<typeof setTimeout>;
+      // Brief pause at 100%, then auto-transition
+      const t1 = setTimeout(() => {
+        setLoaded(true);
+        t2 = setTimeout(() => setIsLoaded(true), 200);
+      }, 200);
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+      };
+    }
+  }, [percent]);
+
+  useEffect(() => {
+    if (!isLoaded) return;
     import("./utils/initialFX").then((module) => {
-      if (isLoaded) {
-        setClicked(true);
-        setTimeout(() => {
-          if (module.initialFX) {
-            module.initialFX();
-          }
+      setClicked(true);
+      setTimeout(() => {
+        try {
+          module.initialFX?.();
+        } finally {
           setIsLoading(false);
-        }, 900);
-      }
+        }
+      }, 800);
     });
-  }, [isLoaded]);
+  }, [isLoaded, setIsLoading]);
 
   function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
     const { currentTarget: target } = e;
@@ -59,12 +74,16 @@ const Loading = ({ percent }: { percent: number }) => {
           </div>
         </div>
       </div>
-      <div className="loading-screen">
-        <div className="loading-marquee">
-          <Marquee>
-            <span> Full Stack Developer</span> <span>Software Engineer</span>
-            <span> Full Stack Developer</span> <span>Software Engineer</span>
-          </Marquee>
+      <div className="loading-screen" role="status" aria-live="polite">
+        <div className="loading-marquee" aria-hidden="true">
+          <div className="marquee-track">
+            {marqueeItems.map((text, i) => (
+              <span key={i}>{text}</span>
+            ))}
+            {marqueeItems.map((text, i) => (
+              <span key={`dup-${i}`}>{text}</span>
+            ))}
+          </div>
         </div>
         <div
           className={`loading-wrap ${clicked && "loading-clicked"}`}
@@ -74,7 +93,10 @@ const Loading = ({ percent }: { percent: number }) => {
           <div className={`loading-button ${loaded && "loading-complete"}`}>
             <div className="loading-container">
               <div className="loading-content">
-                <div className="loading-content-in">
+                <div
+                  className="loading-content-in"
+                  aria-label={`Loading ${percent} percent`}
+                >
                   Loading <span>{percent}%</span>
                 </div>
               </div>

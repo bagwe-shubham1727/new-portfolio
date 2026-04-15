@@ -8,6 +8,7 @@ export type CareerItem = {
 export type ProjectItem = {
   title: string;
   category: string;
+  description: string;
   tools: string;
   image: string;
   link?: string;
@@ -60,6 +61,8 @@ export const personalContent = {
       {
         title: "Sentiment Aura",
         category: "Real-Time AI Voice Sentiment Visualization",
+        description:
+          "Captures live voice input via Deepgram WebSockets and analyzes sentiment in real time using Google Gemini, rendering dynamic p5.js visualizations that shift color and form based on emotional tone.",
         tools:
           "React, Node.js, p5.js, Deepgram WebSockets, Google Gemini",
         image:
@@ -69,6 +72,8 @@ export const personalContent = {
       {
         title: "Student Nexus",
         category: "Student Accommodation Platform",
+        description:
+          "End-to-end student housing platform with OAuth 2.0 authentication, Stripe payments, and real-time listing search. Deployed on AWS with MongoDB and Express.js backend.",
         tools:
           "React, TypeScript, Redux, Express.js, OAuth 2.0, JWT, Stripe, MongoDB, AWS",
         image: "https://image.thum.io/get/width/1200/https://student-nexus.vercel.app/",
@@ -77,6 +82,8 @@ export const personalContent = {
       {
         title: "Health Bridge",
         category: "ML-Powered Healthcare Platform",
+        description:
+          "All-in-one healthcare system with ML-powered disease prediction using Scikit-learn, integrated appointment booking, and patient record management through a React frontend and Flask API.",
         tools:
           "ReactJS, Node.js, Express.js, MongoDB, Python, Flask, Scikit-learn",
         image:
@@ -112,8 +119,6 @@ export const personalContent = {
     social: {
       github: "https://github.com/bagwe-shubham1727",
       linkedin: "https://www.linkedin.com/in/shubham-bagwe/",
-      twitter: "https://shubham-bagwe-portfolio.vercel.app/",
-      instagram: "https://shubham-bagwe-portfolio.vercel.app/",
     },
     creditName: "Shubham Bagwe",
     year: "2026",
@@ -121,8 +126,6 @@ export const personalContent = {
   socialIcons: {
     github: "https://github.com/bagwe-shubham1727",
     linkedin: "https://www.linkedin.com/in/shubham-bagwe/",
-    twitter: "https://shubham-bagwe-portfolio.vercel.app/",
-    instagram: "https://shubham-bagwe-portfolio.vercel.app/",
     resumeUrl: "/Shubham_Bagwe_Resume.pdf",
   },
 } as const;

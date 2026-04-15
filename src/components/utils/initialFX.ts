@@ -2,11 +2,23 @@ import { SplitText } from "gsap/SplitText";
 import gsap from "gsap";
 import { smoother } from "../Navbar";
 
+const prefersReducedMotion = () =>
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 export function initialFX() {
   // General init — runs on ALL screen sizes
   document.body.style.overflowY = "auto";
   smoother?.paused(false);
   document.getElementsByTagName("main")[0].classList.add("main-active");
+
+  // If user prefers reduced motion, show everything instantly
+  if (prefersReducedMotion()) {
+    document.body.style.backgroundColor = "#0a0e17";
+    gsap.set(".landing-info-h2", { opacity: 1, y: 0 });
+    gsap.set([".header", ".icons-section", ".nav-fade"], { opacity: 1 });
+    return;
+  }
+
   gsap.to("body", {
     backgroundColor: "#0a0e17",
     duration: 0.5,
@@ -36,9 +48,20 @@ export function initialFX() {
     }
   );
 
-  // SplitText animations — skip on mobile (< 900px)
-  // ALL SplitText variables and LoopText calls stay below this guard.
-  if (window.innerWidth < 900) return;
+  // SplitText animations — mobile gets simpler container-level animations
+  if (window.innerWidth < 900) {
+    gsap.fromTo(
+      ".landing-intro",
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", delay: 0.2 }
+    );
+    gsap.fromTo(
+      ".landing-info h3",
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", delay: 0.4 }
+    );
+    return;
+  }
 
   var landingText = new SplitText(
     [".landing-info h3", ".landing-intro h2", ".landing-intro h1"],

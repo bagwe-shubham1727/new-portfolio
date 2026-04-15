@@ -1,6 +1,9 @@
 import type * as THREE from "three";
 import gsap from "gsap";
 
+const prefersReducedMotion = () =>
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 export function setCharTimeline(
   character: THREE.Object3D<THREE.Object3DEventMap> | null,
   camera: THREE.PerspectiveCamera
@@ -143,6 +146,12 @@ export function setCharTimeline(
 }
 
 export function setAllTimeline() {
+  if (prefersReducedMotion()) {
+    gsap.set(".career-timeline", { maxHeight: "100%", opacity: 1 });
+    gsap.set(".career-info-box", { opacity: 1 });
+    gsap.set(".what-box-in", { display: "flex" });
+    return;
+  }
   const isMobile = window.innerWidth < 1024;
   const dur = isMobile ? 0.3 : 0.5;
   const stagger = isMobile ? 0.06 : 0.1;

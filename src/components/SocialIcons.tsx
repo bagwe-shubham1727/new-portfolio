@@ -67,12 +67,12 @@ const SocialIcons = () => {
     <div className="icons-section">
       <div className="social-icons" data-cursor="icons" id="social">
         <span>
-          <a href={socialIcons.github} target="_blank">
+          <a href={socialIcons.github} target="_blank" rel="noopener noreferrer">
             <FaGithub />
           </a>
         </span>
         <span>
-          <a href={socialIcons.linkedin} target="_blank">
+          <a href={socialIcons.linkedin} target="_blank" rel="noopener noreferrer">
             <FaLinkedinIn />
           </a>
         </span>

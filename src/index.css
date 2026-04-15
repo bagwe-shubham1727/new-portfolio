@@ -1,8 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
+
 
 :root {
-  font-family: "Geist", sans-serif;
+  /* Font families */
+  --font-display: "DM Serif Display", serif;
+  --font-body: "Geist", sans-serif;
 
+  font-family: var(--font-body);
   font-optical-sizing: auto;
   font-style: normal;
   line-height: 1.5;
@@ -15,13 +18,24 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
+
+  /* Colors */
   --accentColor: #5eead4;
   --backgroundColor: #0a0e17;
+
+  /* Viewport */
   --vh: 100vh;
   --vh: 100svh;
+
+  /* Type scale (fluid with clamp) */
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);
+  --text-base: clamp(1rem, 0.9rem + 0.4vw, 1.125rem);
+  --text-lg: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --text-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+  --text-2xl: clamp(2rem, 1.5rem + 2vw, 3rem);
+  --text-3xl: clamp(2.5rem, 1.8rem + 3vw, 4.375rem);
+  --text-4xl: clamp(3rem, 2rem + 4vw, 5rem);
 }
 
 h1,
@@ -30,7 +44,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Geist", sans-serif;
+  font-family: var(--font-body);
 }
 
 body {
@@ -44,6 +58,34 @@ a {
 
 a:hover {
   color: var(--accentColor);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accentColor);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Skip to main content */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 16px;
+  z-index: 9999999999;
+  background-color: var(--accentColor);
+  color: var(--backgroundColor);
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 16px;
+  color: var(--backgroundColor);
 }
 
 main {
@@ -113,7 +155,8 @@ body {
 }
 
 .techstack h2 {
-  font-size: 80px;
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
   text-align: center;
   font-weight: 400;
   text-transform: uppercase;
@@ -150,8 +193,60 @@ body {
   color: #aaa6c3;
 }
 
+/* Mobile tech stack grid */
+.tech-icons-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px 16px;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.tech-icon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.tech-icon-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(94, 234, 212, 0.15));
+}
+
+@media screen and (max-width: 400px) {
+  .tech-icons-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .techstack h2 {
+    margin-bottom: 40px;
+  }
+
+  .techstack {
+    padding: 50px 0;
+  }
+}
+
 @media screen and (min-width: 768px) {
   body {
     --cWidth: 94%;
+  }
+}
+
+/* Reduced motion: disable all CSS animations and transitions */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

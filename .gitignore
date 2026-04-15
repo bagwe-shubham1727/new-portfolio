@@ -24,6 +24,9 @@ dist-ssr
 *.sw?
 .npmrc
 
+# TypeScript build cache
+*.tsbuildinfo
+
 backup/
 .env
 .agent

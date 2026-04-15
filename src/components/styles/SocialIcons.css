@@ -11,8 +11,8 @@
   position: absolute;
   left: -20px;
   bottom: 20px;
-  display: none;
-  flex-direction: column;
+  display: flex;
+  flex-direction: row;
   gap: 8px;
   z-index: 999;
   padding: 10px;
@@ -83,7 +83,7 @@ div.resume-button span {
 }
 @media only screen and (min-width: 900px) {
   .social-icons {
-    display: flex;
+    flex-direction: column;
     gap: 20px;
   }
   .social-icons a {
