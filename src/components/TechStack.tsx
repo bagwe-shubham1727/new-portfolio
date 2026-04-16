@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Decal, Float, useTexture } from "@react-three/drei";
+import { Decal, Float, OrbitControls, useTexture } from "@react-three/drei";
 import { personalContent } from "../data/personalContent";
 import { isDesktop } from "../lib/device";
 
@@ -61,13 +61,14 @@ const Ball = ({ imgUrl }: { imgUrl: string }) => {
 const BallCanvas = ({ icon }: { icon: string }) => {
   return (
     <Canvas
+      frameloop="demand"
       dpr={[1, 2]}
-      gl={{ antialias: false }}
-      style={{ pointerEvents: "none" }}
+      gl={{ preserveDrawingBuffer: true }}
     >
-      <ambientLight intensity={0.25} />
-      <directionalLight position={[0, 0, 0.05]} />
       <Suspense fallback={null}>
+        <OrbitControls enableZoom={false} />
+        <ambientLight intensity={0.25} />
+        <directionalLight position={[0, 0, 0.05]} />
         <Ball imgUrl={icon} />
       </Suspense>
     </Canvas>
