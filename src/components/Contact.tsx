@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { MdArrowOutward, MdCopyright } from "react-icons/md";
 import "./styles/Contact.css";
 import { personalContent } from "../data/personalContent";
@@ -8,22 +8,24 @@ const WORDS = ["build", "create", "ship", "design", "craft"] as const;
 
 const Contact = () => {
   const { contact } = personalContent;
+  const prefersReduced = useReducedMotion();
 
   const [idx, setIdx] = useState(0);
 
   useEffect(() => {
+    if (prefersReduced) return;
     const interval = setInterval(() => {
       setIdx((prev) => (prev + 1) % WORDS.length);
     }, 2200);
     return () => clearInterval(interval);
-  }, []);
+  }, [prefersReduced]);
 
   return (
     <div className="contact-section section-container" id="contact">
       <div className="contact-container">
         <h2 className="contact-cta-heading">
-          Lets{" "}
-          <span className="contact-cta-word-wrap">
+          Let's{" "}
+          <span className="contact-cta-word-wrap" aria-live="polite" aria-atomic="true">
             <AnimatePresence mode="wait">
               <motion.span
                 key={WORDS[idx]}
@@ -32,7 +34,6 @@ const Contact = () => {
                 exit={{ opacity: 0, y: -6 }}
                 transition={{ duration: 0.2 }}
                 className="contact-cta-word"
-                aria-live="polite"
               >
                 {WORDS[idx]}
               </motion.span>

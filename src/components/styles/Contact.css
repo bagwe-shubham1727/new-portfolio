@@ -10,6 +10,7 @@
 .contact-cta-word-wrap {
   display: inline-block;
   position: relative;
+  overflow: hidden;
 }
 
 .contact-cta-word {
