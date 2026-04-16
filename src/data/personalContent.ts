@@ -113,7 +113,7 @@ export const personalContent = {
   },
   contact: {
     title: "Contact",
-    email: "bagwe.sh@northeastern.edu",
+    email: "workwithshubhambagwe@gmail.com",
     education:
       "MS in Computer Software Engineering (Northeastern University)",
     social: {

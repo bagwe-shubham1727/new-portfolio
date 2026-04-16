@@ -47,11 +47,11 @@ const Navbar = () => {
           SB
         </a>
         <a
-          href="mailto:bagwe.sh@northeastern.edu"
+          href="mailto:workwithshubhambagwe@gmail.com"
           className="navbar-connect"
           data-cursor="disable"
         >
-          bagwe.sh@northeastern.edu
+          workwithshubhambagwe@gmail.com
         </a>
         <ul>
           <li>
