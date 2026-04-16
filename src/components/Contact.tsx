@@ -1,13 +1,45 @@
+import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { MdArrowOutward, MdCopyright } from "react-icons/md";
 import "./styles/Contact.css";
 import { personalContent } from "../data/personalContent";
 
+const WORDS = ["build", "create", "ship", "design", "craft"] as const;
+
 const Contact = () => {
   const { contact } = personalContent;
+
+  const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIdx((prev) => (prev + 1) % WORDS.length);
+    }, 2200);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="contact-section section-container" id="contact">
       <div className="contact-container">
+        <h2 className="contact-cta-heading">
+          Lets{" "}
+          <span className="contact-cta-word-wrap">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={WORDS[idx]}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.2 }}
+                className="contact-cta-word"
+                aria-live="polite"
+              >
+                {WORDS[idx]}
+              </motion.span>
+            </AnimatePresence>
+          </span>{" "}
+          <br /> incredible work together.
+        </h2>
         <h3>{contact.title}</h3>
         <p className="contact-cta-text">
           Have an idea or opportunity? Let's build something together.
