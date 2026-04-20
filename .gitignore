@@ -32,3 +32,4 @@ backup/
 .agent
 .claude
 .superpowers
+.playwright-mcp

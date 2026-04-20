@@ -19,6 +19,14 @@ export type TechItem = {
   icon: string;
 };
 
+export type TestimonialItem = {
+  quote: string;
+  author: string;
+  title: string;
+  company: string;
+  image: string;
+};
+
 export const personalContent = {
   landing: {
     greeting: "Hello! I'm",
@@ -110,6 +118,44 @@ export const personalContent = {
       { name: "Figma", icon: "figma" },
       { name: "Docker", icon: "docker" },
     ] as TechItem[],
+  },
+  testimonials: {
+    title: "What People",
+    titleHighlight: "Say",
+    items: [
+      {
+        quote:
+          "Shubham is a proactive, collaborative, and highly supportive student. His problem-solving ability, leadership, and empathy make him stand out. I'm confident he will be a valuable asset to any team or organization he joins.",
+        author: "Dr. Yu Jones",
+        title: "Teaching Professor",
+        company: "Northeastern University",
+        image: "yu",
+      },
+      {
+        quote:
+          "Shubham is a dedicated and high-performing engineer who consistently delivers excellent results. His initiative-driven mindset, quick learning ability, and strong problem-solving skills made him a key contributor to multiple high-impact projects. He is reliable, collaborative, and an asset to any team.",
+        author: "Dibyajit Chatterjee",
+        title: "Director of Engineering",
+        company: "Ingram Micro",
+        image: "dj",
+      },
+      {
+        quote:
+          "Shubham quickly translates business needs into effective technical solutions. His work improving procurement workflows, optimizing APIs, and enhancing system performance had a clear impact on efficiency and user experience. He is dependable, skilled, and delivers results.",
+        author: "Shirish Joshi",
+        title: "Senior Engineering Manager",
+        company: "GEP Worldwide",
+        image: "shirish",
+      },
+      {
+        quote:
+          "Shubham is a technically strong, detail-oriented, and quick-learning student. His project work in SQL and NoSQL, along with his leadership and problem-solving abilities, consistently stood out. He is disciplined, reliable, and well-prepared to excel in any future endeavor.",
+        author: "Rohit Barve",
+        title: "Professor",
+        company: "Vidyalankar Institute of Technology",
+        image: "rohit",
+      },
+    ] as TestimonialItem[],
   },
   contact: {
     title: "Contact",

@@ -1,0 +1,148 @@
+.testimonials-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  padding: 80px 0;
+  position: relative;
+  z-index: 2;
+  background-color: var(--backgroundColor);
+}
+
+.testimonials-section h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  line-height: 1;
+  font-weight: 400;
+  text-align: center;
+  background: linear-gradient(0deg, #2dd4bf, #ffffff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  margin-top: 0;
+  margin-bottom: 70px;
+}
+
+.testimonials-section h2 > span {
+  font-family: var(--font-body);
+  font-weight: 300;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  width: 100%;
+}
+
+.testimonial-card {
+  border: 1px solid #363636;
+  border-radius: 12px;
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.03);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+  opacity: 0;
+}
+
+.testimonial-quote {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 300;
+  line-height: 1.65;
+  color: #adacac;
+  margin: 0;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.testimonial-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.testimonial-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.testimonial-name {
+  font-weight: 500;
+  font-size: var(--text-sm);
+  color: #eae5ec;
+}
+
+.testimonial-role {
+  font-size: var(--text-xs);
+  color: var(--accentColor);
+  font-weight: 400;
+}
+
+/* 1600px */
+@media only screen and (max-width: 1600px) {
+  .testimonial-card {
+    padding: 28px;
+  }
+}
+
+/* 1400px */
+@media only screen and (max-width: 1400px) {
+  .testimonial-card {
+    padding: 24px;
+    gap: 22px;
+  }
+
+  .testimonial-quote {
+    font-size: 14px;
+  }
+}
+
+/* Tablet - stack to single column */
+@media only screen and (max-width: 900px) {
+  .testimonials-section {
+    padding: 60px 0;
+  }
+
+  .testimonials-section h2 {
+    margin-bottom: 50px;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: calc(100% - 25px);
+  }
+
+  .testimonial-card {
+    padding: 24px;
+  }
+}
+
+/* Mobile */
+@media only screen and (max-width: 600px) {
+  .testimonials-section {
+    padding: 50px 0;
+    align-items: start;
+  }
+
+  .testimonials-section h2 {
+    width: 100%;
+    margin-bottom: 40px;
+  }
+
+  .testimonial-card {
+    padding: 20px;
+    gap: 20px;
+  }
+}

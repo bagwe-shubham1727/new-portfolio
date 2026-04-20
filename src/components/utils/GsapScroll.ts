@@ -150,6 +150,7 @@ export function setAllTimeline() {
     gsap.set(".career-timeline", { maxHeight: "100%", opacity: 1 });
     gsap.set(".career-info-box", { opacity: 1 });
     gsap.set(".what-box-in", { display: "flex" });
+    gsap.set(".testimonial-card", { opacity: 1 });
     return;
   }
   const isMobile = window.innerWidth < 1024;
@@ -211,4 +212,20 @@ export function setAllTimeline() {
       0
     );
   }
+
+  const testimonialsTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".testimonials-section",
+      start: "top 70%",
+      end: "center center",
+      scrub: true,
+      invalidateOnRefresh: true,
+    },
+  });
+  testimonialsTimeline.fromTo(
+    ".testimonial-card",
+    { opacity: 0, y: 30 },
+    { opacity: 1, y: 0, stagger: stagger, duration: dur },
+    0
+  );
 }
