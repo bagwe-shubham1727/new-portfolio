@@ -52,6 +52,7 @@ const Contact = () => {
         >
           Say Hello <MdArrowOutward />
         </a>
+        <hr className="contact-divider" aria-hidden="true" />
         <div className="contact-flex">
           <div className="contact-box">
             <h4>Email</h4>
