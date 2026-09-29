@@ -57,7 +57,7 @@ const Scene = () => {
       loadCharacter().then((gltf) => {
         if (gltf) {
           const animations = setAnimations(gltf);
-          hoverDivRef.current && animations.hover(gltf, hoverDivRef.current);
+          if (hoverDivRef.current) animations.hover(gltf, hoverDivRef.current);
           mixer = animations.mixer;
           const character = gltf.scene;
           setChar(character);

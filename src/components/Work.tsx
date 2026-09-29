@@ -77,7 +77,8 @@ const Work = () => {
   const handleTouchEnd = (e: React.TouchEvent) => {
     const delta = e.changedTouches[0].clientX - touchStartX.current;
     if (Math.abs(delta) > 50) {
-      delta > 0 ? goToPrev() : goToNext();
+      if (delta > 0) goToPrev();
+      else goToNext();
     }
   };
 
