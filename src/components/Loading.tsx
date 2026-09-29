@@ -153,5 +153,9 @@ export const setProgress = (setLoading: (value: number) => void) => {
       }, 2);
     });
   }
-  return { loaded, percent, clear };
+
+  function stop() {
+    clearInterval(interval);
+  }
+  return { loaded, percent, clear, stop };
 };
