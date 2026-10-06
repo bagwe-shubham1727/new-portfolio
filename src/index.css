@@ -168,7 +168,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 40px;
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -179,11 +179,13 @@ body {
   align-items: center;
   width: 140px;
   height: 180px;
+  user-select: none;
 }
 
-.tech-ball-wrapper canvas {
-  width: 140px !important;
-  height: 140px !important;
+.tech-ball-view {
+  width: 140px;
+  height: 140px;
+  cursor: grab;
 }
 
 .tech-label {

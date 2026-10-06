@@ -1,7 +1,7 @@
 import { useState, useCallback, useRef } from "react";
 import "./styles/Work.css";
 import WorkImage from "./WorkImage";
-import { MdArrowBack, MdArrowForward } from "react-icons/md";
+import { MdArrowBack, MdArrowForward, MdArrowOutward } from "react-icons/md";
 import { personalContent } from "../data/personalContent";
 import { isDesktop } from "../lib/device";
 
@@ -24,10 +24,29 @@ const ProjectCard = ({
       <div className="carousel-details">
         <h4>{project.title}</h4>
         <p className="carousel-category">{project.category}</p>
-        <p className="carousel-description">{project.description}</p>
+        <ul className="carousel-highlights" role="list">
+          {project.highlights.map((highlight) => (
+            <li key={highlight}>{highlight}</li>
+          ))}
+        </ul>
         <div className="carousel-tools">
           <span className="tools-label">{toolsLabel}</span>
           <p>{project.tools}</p>
+        </div>
+        <div className="carousel-links">
+          {project.links.map((link) => (
+            <a
+              key={link.label}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="carousel-link"
+              data-cursor="disable"
+              aria-label={`${project.title} ${link.label}`}
+            >
+              {link.label} <MdArrowOutward aria-hidden="true" />
+            </a>
+          ))}
         </div>
       </div>
     </div>
@@ -153,6 +172,8 @@ const Work = () => {
                     role="group"
                     aria-roledescription="slide"
                     aria-label={`Slide ${index + 1} of ${projects.length}: ${project.title}`}
+                    // Off-screen slides are only translated aside, so keep their links out of the tab order
+                    {...(index !== currentIndex ? { inert: "" } : {})}
                   >
                     <ProjectCard project={project} index={index} toolsLabel={work.toolsLabel} />
                   </div>

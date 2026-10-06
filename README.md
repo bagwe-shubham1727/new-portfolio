@@ -16,8 +16,8 @@ A personal portfolio website built with React, Three.js, and GSAP. Features an i
 - **Scroll-driven animations** — GSAP ScrollSmoother and ScrollTrigger for parallax and reveal effects
 - **Custom cursor** — Animated cursor with hover states, desktop-only
 - **Responsive layout** — Mobile-first design with touch device detection; 3D/cursor features gated to desktop
-- **Tech stack visualization** — 3D floating icon display using Three.js
-- **Work portfolio** — Project showcase with images and descriptions
+- **Tech stack visualization** — 3D floating icons sharing a single WebGL canvas (drei `View`)
+- **Work portfolio** — Top 3 projects with metric-first highlights and code / write-up links
 - **Contact section** — Direct contact links
 - **Performance optimized** — Code splitting, Brotli/gzip compression, Vercel Analytics
 
@@ -84,8 +84,7 @@ src/
 
 public/
 ├── models/             # GLTF character model (encrypted + Draco compressed)
-├── draco/              # Draco WASM decoder
-└── Shubham_Bagwe_Resume.pdf
+└── draco/              # Draco WASM decoder
 ```
 
 ---
