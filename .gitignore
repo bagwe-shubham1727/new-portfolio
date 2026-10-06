@@ -33,3 +33,5 @@ backup/
 .claude
 .superpowers
 .playwright-mcp
+.vercel
+.env*
