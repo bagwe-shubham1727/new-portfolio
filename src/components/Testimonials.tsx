@@ -19,7 +19,7 @@ const Testimonials = () => {
   return (
     <div className="testimonials-section section-container">
       <h2>
-        {testimonials.title} <span>&</span>
+        {testimonials.title}
         <br /> {testimonials.titleHighlight}
       </h2>
       <div className="testimonials-grid">

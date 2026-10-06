@@ -58,6 +58,7 @@
 }
 
 .carousel-slide {
+  width: 100%;
   min-width: 100%;
   flex-shrink: 0;
   box-sizing: border-box;
@@ -79,6 +80,7 @@
 }
 
 .carousel-number h3 {
+  font-variant-numeric: tabular-nums;
   font-size: 60px;
   line-height: 1;
   margin: 0;
@@ -105,12 +107,58 @@
   font-size: 16px;
 }
 
-.carousel-description {
+.carousel-highlights {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.carousel-highlights li {
+  position: relative;
+  padding-left: 18px;
   font-weight: 300;
-  color: #adacac;
-  margin: 4px 0 0;
+  color: #d4d3d3;
   font-size: 15px;
   line-height: 1.5;
+}
+
+.carousel-highlights li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accentColor);
+}
+
+.carousel-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.carousel-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.carousel-link:hover,
+.carousel-link:focus-visible {
+  border-color: var(--accentColor);
+  color: var(--accentColor);
 }
 
 .carousel-tools {
@@ -311,18 +359,24 @@
     width: 100%;
   }
 
+  /* Sit in the dots row instead of over the card content */
   .carousel-arrow {
     width: 40px;
     height: 40px;
     font-size: 18px;
+    top: auto;
+    bottom: -15px;
+    transform: none;
   }
 
+  /* Group at the right, clear of the fixed social icons at bottom-left */
   .carousel-arrow-left {
-    left: 10px;
+    left: auto;
+    right: 50px;
   }
 
   .carousel-arrow-right {
-    right: 10px;
+    right: 0;
   }
 }
 

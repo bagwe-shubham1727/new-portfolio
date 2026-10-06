@@ -1,6 +1,14 @@
-import { Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
-import { Decal, Float, OrbitControls, useTexture } from "@react-three/drei";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { Canvas, useFrame } from "@react-three/fiber";
+import {
+  Decal,
+  Float,
+  OrbitControls,
+  PerspectiveCamera,
+  useTexture,
+  View,
+} from "@react-three/drei";
 import { personalContent } from "../data/personalContent";
 import { isDesktop } from "../lib/device";
 
@@ -10,13 +18,19 @@ import javascriptIcon from "../assets/tech/javascript.png";
 import typescriptIcon from "../assets/tech/typescript.png";
 import reactjsIcon from "../assets/tech/reactjs.png";
 import reduxIcon from "../assets/tech/redux.png";
+import zustandIcon from "../assets/tech/zustand.png";
 import tailwindIcon from "../assets/tech/tailwind.png";
 import nodejsIcon from "../assets/tech/nodejs.png";
+import dotnetIcon from "../assets/tech/dotnet.png";
+import pythonIcon from "../assets/tech/python.png";
+import postgresqlIcon from "../assets/tech/postgresql.png";
 import mongodbIcon from "../assets/tech/mongodb.png";
-import threejsIcon from "../assets/tech/threejs.png";
+import redisIcon from "../assets/tech/redis.png";
+import dockerIcon from "../assets/tech/docker.png";
+import awsIcon from "../assets/tech/aws.png";
+import gcpIcon from "../assets/tech/gcp.png";
 import gitIcon from "../assets/tech/git.png";
 import figmaIcon from "../assets/tech/figma.png";
-import dockerIcon from "../assets/tech/docker.png";
 
 const techIcons: Record<string, string> = {
   html: htmlIcon,
@@ -25,13 +39,19 @@ const techIcons: Record<string, string> = {
   typescript: typescriptIcon,
   reactjs: reactjsIcon,
   redux: reduxIcon,
+  zustand: zustandIcon,
   tailwind: tailwindIcon,
   nodejs: nodejsIcon,
+  dotnet: dotnetIcon,
+  python: pythonIcon,
+  postgresql: postgresqlIcon,
   mongodb: mongodbIcon,
-  threejs: threejsIcon,
+  redis: redisIcon,
+  docker: dockerIcon,
+  aws: awsIcon,
+  gcp: gcpIcon,
   git: gitIcon,
   figma: figmaIcon,
-  docker: dockerIcon,
 };
 
 const Ball = ({ imgUrl }: { imgUrl: string }) => {
@@ -58,28 +78,68 @@ const Ball = ({ imgUrl }: { imgUrl: string }) => {
   );
 };
 
-const BallCanvas = ({ icon }: { icon: string }) => {
-  return (
-    <Canvas
-      frameloop="demand"
-      dpr={[1, 2]}
-      gl={{ preserveDrawingBuffer: true }}
-    >
-      <Suspense fallback={null}>
-        <OrbitControls enableZoom={false} />
-        <ambientLight intensity={0.25} />
-        <directionalLight position={[0, 0, 0.05]} />
-        <Ball imgUrl={icon} />
-      </Suspense>
-    </Canvas>
-  );
+// Views render into a shared canvas without clearing it, so wipe the whole
+// frame first (priority 0 runs before the views' priority 1).
+const ClearFrame = () => {
+  useFrame(({ gl }) => {
+    gl.setScissorTest(false);
+    gl.clear(true, true);
+  }, 0);
+  return null;
 };
+
+// Each ball used to own a WebGL canvas. Browsers cap live contexts (~16 in
+// Chrome) and drop the oldest one, which is the hero character, so all balls
+// share one fixed canvas and each renders into its own <View> rectangle.
+const SharedBallCanvas = ({ active }: { active: boolean }) =>
+  createPortal(
+    <Canvas
+      frameloop={active ? "always" : "never"}
+      dpr={[1, 1.5]}
+      style={{
+        position: "fixed",
+        inset: 0,
+        pointerEvents: "none",
+        zIndex: 5,
+        visibility: active ? "visible" : "hidden",
+      }}
+    >
+      <ClearFrame />
+      <View.Port />
+    </Canvas>,
+    document.body
+  );
+
+const BallView = ({ icon }: { icon: string }) => (
+  <View className="tech-ball-view">
+    <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={75} />
+    <OrbitControls enableZoom={false} enablePan={false} />
+    <ambientLight intensity={0.25} />
+    <directionalLight position={[0, 0, 0.05]} />
+    <Suspense fallback={null}>
+      <Ball imgUrl={icon} />
+    </Suspense>
+  </View>
+);
 
 const TechStack = () => {
   const { techStack } = personalContent;
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    if (!isDesktop || !sectionRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setActive(entry.isIntersecting),
+      // ScrollSmoother clips content to #smooth-wrapper, so observe against it
+      { root: document.querySelector("#smooth-wrapper"), rootMargin: "200px 0px" }
+    );
+    observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div className="techstack">
+    <div className="techstack" ref={sectionRef}>
       <h2>{techStack.title}</h2>
       <div className={isDesktop ? "tech-balls-grid" : "tech-icons-grid"}>
         {techStack.technologies.map((tech) => (
@@ -88,7 +148,7 @@ const TechStack = () => {
             key={tech.name}
           >
             {isDesktop ? (
-              <BallCanvas icon={techIcons[tech.icon]} />
+              <BallView icon={techIcons[tech.icon]} />
             ) : (
               <img
                 src={techIcons[tech.icon]}
@@ -103,6 +163,7 @@ const TechStack = () => {
           </div>
         ))}
       </div>
+      {isDesktop && <SharedBallCanvas active={active} />}
     </div>
   );
 };

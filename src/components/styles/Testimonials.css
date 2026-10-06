@@ -24,11 +24,6 @@
   margin-bottom: 70px;
 }
 
-.testimonials-section h2 > span {
-  font-family: var(--font-body);
-  font-weight: 300;
-}
-
 .testimonials-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

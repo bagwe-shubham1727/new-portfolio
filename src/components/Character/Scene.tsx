@@ -53,11 +53,15 @@ const Scene = () => {
       const light = setLighting(scene);
       const progress = setProgress((value) => setLoading(value));
       const { loadCharacter } = setCharacter(renderer, scene, camera);
+      // Set on cleanup so a load that resolves after unmount (e.g. StrictMode's
+      // discarded first mount) can't drive the shared loading percent.
+      let disposed = false;
 
       loadCharacter().then((gltf) => {
+        if (disposed) return;
         if (gltf) {
           const animations = setAnimations(gltf);
-          hoverDivRef.current && animations.hover(gltf, hoverDivRef.current);
+          if (hoverDivRef.current) animations.hover(gltf, hoverDivRef.current);
           mixer = animations.mixer;
           const character = gltf.scene;
           setChar(character);
@@ -75,7 +79,7 @@ const Scene = () => {
           window.addEventListener("resize", resizeHandlerRef.current);
         }
       }).catch(() => {
-        progress.clear();
+        if (!disposed) progress.clear();
       });
 
       let mouse = { x: 0, y: 0 },
@@ -130,6 +134,8 @@ const Scene = () => {
       };
       animate();
       return () => {
+        disposed = true;
+        progress.stop();
         clearTimeout(debounce);
         scene.clear();
         renderer.dispose();
