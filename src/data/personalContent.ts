@@ -45,7 +45,7 @@ export const personalContent = {
   about: {
     title: "About Me",
     summary:
-      "Full-Stack Software Engineer with 2+ years of professional experience building high-scale web platforms and transaction-critical systems using React, TypeScript, Node.js, and C# .NET. Most recently, I rewrote a legacy healthcare portal as a React 19 SPA at Abacus Health Solutions. I focus on performance, observability, and resilient architecture, and I enjoy shipping reliable products from backend services to polished frontend experiences.",
+      "Full-stack software engineer with 2+ years building production web platforms in React, TypeScript, Node.js, and C#\u00a0.NET. At Ingram Micro, I helped cut checkout latency from 500ms to 170ms on a platform handling $1M+ in daily sales. Most recently, I rebuilt a legacy healthcare portal as a React 19 app at Abacus Health Solutions and shipped it to production. Now completing my MS in Information Systems at Northeastern University in Boston. Open to full-time software engineering roles starting January 2027.",
   },
   career: {
     titleLine1: "My career",
@@ -63,7 +63,7 @@ export const personalContent = {
         company: "Ingram Micro",
         period: "Jul 2022 - Aug 2024",
         description:
-          "Built asynchronous, cache-backed C# .NET microservices for cart and checkout, cutting latency from 500ms to 170ms for $1M+ in daily sales, and contributed to a React and TypeScript checkout redesign that sped up page loads by 25% and reduced abandonment by about 15%. Introduced Datadog monitoring, improving MTTR from 2 hours to under 1 hour.",
+          "Built asynchronous, cache-backed C# .NET microservices for cart and checkout, cutting latency from 500ms to 170ms for $1M+ in daily sales, and contributed to a React and TypeScript checkout redesign that sped up page loads by 25% and reduced abandonment by about 15%. Introduced Datadog monitoring, improving MTTR from 2 hours to under 1 hour. Promoted from Associate Software Engineer in May 2023.",
       },
       {
         role: "Software Developer Intern",
@@ -99,6 +99,23 @@ export const personalContent = {
         ],
       },
       {
+        title: "Marino RAG",
+        category: "Retrieval-Augmented Chat Assistant for Northeastern Recreation Staff",
+        highlights: [
+          "Used by Marino Recreation staff to answer member questions from Northeastern Recreation's public site, with cited sources",
+          "Correct source page ranks in the top 3 for 48 of 50 evaluation questions (96%) and first for 41 of 50 (82%)",
+          "Hand-rolled pipeline: web crawler, recursive chunking, BGE embeddings in Chroma, and cross-encoder reranking",
+        ],
+        tools:
+          "Python, FastAPI, sentence-transformers, Chroma, OpenRouter, Next.js, TypeScript, pytest",
+        image:
+          "https://opengraph.githubassets.com/1/bagwe-shubham1727/marino-rag",
+        link: "https://github.com/bagwe-shubham1727/marino-rag",
+        links: [
+          { label: "Code", url: "https://github.com/bagwe-shubham1727/marino-rag" },
+        ],
+      },
+      {
         title: "Healthcare Plan Management System",
         category: "Distributed Search and Storage API",
         highlights: [
@@ -121,7 +138,7 @@ export const personalContent = {
         category: "Real-Time AI Voice Sentiment Visualization",
         highlights: [
           "Streams live speech through Deepgram WebSockets to Google Gemini for sentiment, tone, and keywords",
-          "60 FPS React and p5.js visualization engine using spatial hashing and object pooling",
+          "React and p5.js visualization: 100 orbital particles and a reactive hex grid on an 11-stop sentiment color gradient",
           "Retry logic, exponential backoff, and fault-tolerant parsing keep streaming resilient to transient failures",
         ],
         tools:
@@ -130,6 +147,7 @@ export const personalContent = {
           "https://opengraph.githubassets.com/176da5bf12d3d442055291f62feb99a72d065a7da4256e6ccd531c9dc6abe7d6/bagwe-shubham1727/sentiment-aura",
         link: "https://github.com/bagwe-shubham1727/sentiment-aura",
         links: [
+          { label: "Live", url: "https://sentiment-aura-iota.vercel.app/" },
           { label: "Code", url: "https://github.com/bagwe-shubham1727/sentiment-aura" },
         ],
       },
@@ -201,7 +219,7 @@ export const personalContent = {
     title: "Contact",
     email: "workwithshubhambagwe@gmail.com",
     education:
-      "MS in Computer Software Engineering, Northeastern University (Expected Dec 2026)",
+      "MS in Information Systems, Northeastern University (Expected Dec 2026)",
     social: {
       github: "https://github.com/bagwe-shubham1727",
       linkedin: "https://www.linkedin.com/in/shubham-bagwe/",
